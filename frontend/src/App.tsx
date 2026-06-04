@@ -1,16 +1,26 @@
-import { useState } from 'react'
 import './App.css'
+import Navbar from './components/Navbar'
+import { Routes, Route} from 'react-router-dom'
+
+import ListBarbershops from './pages/ListBarbershops'
+import RegisterBarberShop from './pages/RegisterBarberShop'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-   <div className="bg-red-500 p-10">
-    <h1 className="text-[150px] font-black text-white">
-    Cadastro Barbearia
-   </h1>
-   </div>
-  )
+    <>
+    <div className="min-h-screen bg-zinc-950 text-white">
+    <Navbar />
+    <div className="p-6">
+    <Routes>
+      <Route path="/" element={<RegisterBarberShop />} />
+      <Route path="/barbershops" element={<ListBarbershops />} />
+    </Routes>
+    </div>
+    </div>
+  </>
+  );
 }
 
-export default App
+export default App;
