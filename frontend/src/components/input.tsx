@@ -13,7 +13,7 @@ export default function Input({ label, className ="", ...props}: InputProps) {
                     {label}
                 </label>
             )}
-            <input className={`p-2 rounded bg-zinc-900 text-white outline-none border border-zinc-700 focus:border-blue-500 transition ${className}`}
+            <input className={`p-2 rounded-[10px] bg-zinc-900 text-white outline-none border border-zinc-700 focus:border-blue-500 transition ${className}`}
             {...props}
             />
         </div>

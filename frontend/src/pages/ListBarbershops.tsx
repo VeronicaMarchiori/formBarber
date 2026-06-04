@@ -21,7 +21,7 @@ const barbershops = [
 
 export default function ListBarberShops() {
     return (
-        <div className="max-w-4x1 mx-auto mt-6"> 
+        <div className="min-w-[300-px] max-w-[600px] mx-auto">
             {/* CARD PRINCIPAL */}
             <Card>
             <h1>Listagem Barbearias</h1>
