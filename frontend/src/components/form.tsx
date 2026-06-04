@@ -25,28 +25,57 @@ export default function Form() {
         "SE", "TO"
     ];
 
-    function handleChange(e: | React.ChangeEvent<HTMLInputElement>
-                            | React.ChangeEvent<HTMLSelectElement>
-     ){
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value});
-    }
+    function formatPhone(value: string) {
+        const numbers = value.replace(/\D/g, "");
+
+        if (numbers.length <= 2) {
+            return numbers;
+        }
+
+        if (numbers.length <= 7) {
+            return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+        }
+
+        return `(${numbers.slice(0, 2)}) ${numbers.slice(2,7)}-${numbers.slice(7, 11)}`;
+        }
+
+    function handleChange(e:
+            | React.ChangeEvent<HTMLInputElement>
+            | React.ChangeEvent<HTMLSelectElement>) {
+                const { name, value } = e.target;
+
+                if (name === "phone") {
+                    setForm({
+                    ...form,
+                    phone: formatPhone(value),
+                    });
+
+                    return;
+                }
+
+                setForm({
+                    ...form,
+                    [name]: value,
+                });
+    
+            }
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         console.log(form);
     }
 
+    
+
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <Input name="name" placeholder="Nome da Barbearia" onChange={handleChange} />
-            <Input name="owner" placeholder="Nome do responsável" onChange={handleChange} />
-            <Input name="email" placeholder="Email" onChange={handleChange} />
-            <Input name="phone" placeholder="Telefone" onChange={handleChange} />
-            <Input name="city" placeholder="Cidade" onChange={handleChange} />
+            <Input name="name" label="Nome da Barbearia" placeholder="Ex: Barbearia do João" required onChange={handleChange} />
+            <Input name="owner" label="Nome do responsável" placeholder="Ex: João Silva" required onChange={handleChange} />
+            <Input name="email" label="E-mail" type="email" required placeholder="Ex: contato@barbearia.com" value={form.email} onChange={handleChange} />
+            <Input name="phone" label="Telefone/Whatsapp" placeholder="Ex: (49) 99999-9999" required value={form.phone} onChange={handleChange} />
+            <Input name="city" label="Cidade" placeholder="Cidade" required onChange={handleChange} />
             <Select name="state" label="Estado" value={form.state} options={states} onChange={handleChange} />
-            <Input name="chairs" placeholder="Cadeiras" onChange={handleChange} />
+            <Input name="chairs" label="Número de Cadeiras" required type="number" min={1} step={1} value={form.chairs} onChange={handleChange} />
             <Button type="submit"> Cadastrar </Button>
         </form>
     )
