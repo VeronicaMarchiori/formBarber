@@ -1,5 +1,7 @@
 import {useState} from "react";
 import Button from "../components/button";
+import Input from "./input";
+import Select from "../components/select";
 
 
 export default function Form() {
@@ -14,8 +16,18 @@ export default function Form() {
         chairs:""
 
     });
+    const states =[
+        "AC", "AL", "AP", "AM", "BA",
+        "CE", "DF", "ES", "GO", "MA",
+        "MT", "MS", "MG", "PA", "PB",
+        "PR", "PE", "PI", "RJ", "RN",
+        "RS", "RO", "RR", "SC", "SP",
+        "SE", "TO"
+    ];
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
+    function handleChange(e: | React.ChangeEvent<HTMLInputElement>
+                            | React.ChangeEvent<HTMLSelectElement>
+     ){
         setForm({
             ...form,
             [e.target.name]: e.target.value});
@@ -28,14 +40,14 @@ export default function Form() {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input name="name" placeholder="Nome da Barbearia" className="p-2 rounded bg-zinc-950" onChange={handleChange} />
-            <input name="owner" placeholder="Nome do responsável" className="p-2 rounded bg-zinc-950" onChange={handleChange} />
-            <input name="email" placeholder="Email" className="p-2 rounded bg-zinc-950" onChange={handleChange} />
-            <input name="phone" placeholder="Telefone" className="p-2 rounded bg-zinc-950" onChange={handleChange} />
-            <input name="city" placeholder="Cidade" className="p-2 rounded bg-zinc-950" onChange={handleChange} />
-            <input name="state" placeholder="Estado" className="p-2 rounded bg-zinc-950" onChange={handleChange} />
-            <input name="chairs" placeholder="Cadeiras" className="p-2 rounded bg-zinc-950" onChange={handleChange} />
-            <button type="submit"> Cadastrar </button>
+            <Input name="name" placeholder="Nome da Barbearia" onChange={handleChange} />
+            <Input name="owner" placeholder="Nome do responsável" onChange={handleChange} />
+            <Input name="email" placeholder="Email" onChange={handleChange} />
+            <Input name="phone" placeholder="Telefone" onChange={handleChange} />
+            <Input name="city" placeholder="Cidade" onChange={handleChange} />
+            <Select name="state" label="Estado" value={form.state} options={states} onChange={handleChange} />
+            <Input name="chairs" placeholder="Cadeiras" onChange={handleChange} />
+            <Button type="submit"> Cadastrar </Button>
         </form>
     )
 }
