@@ -1,15 +1,22 @@
 import Form from "../components/Form";
 import Card from "../components/card";
+import { Scissors } from "lucide-react";
 
 export default function RegisterBarberShop() {
     return (
-        <div className="min-w-[300-px] max-w-[600px] mx-auto">
-        <Card className="max-w-2x1 mx-auto overflow-hidden rounded-[10px] p-0"> 
-        <div className="bg-gradient-to-r from-[#13263f] via-[#1f3d63] to-[#1b3354] px-8 py-8"> 
-            <h1 className="text-3x1 font-bold text-white">Cadastro de Barbearia</h1>
-            <p className="text-slate-200 mt-2"> Preencha os dados da sua barbearia para iniciar o cadastro. </p>
+        <div className="flex items-center justify-center p-4 min-h-[calc(100vh-4rem)]">
+        <Card className="w-full max-w-2xl bg-gradient-to-b from-[#1a1d23] to-[#0f1419] rounded-2xl shadow-2xl overflow-hidden border border-[#1e3a5f]/30"> 
+
+        {/* Header */}
+
+        <div className="bg-gradient-to-r from-[#0f1419] via-[#1e3a5f] to-[#0a1628] p-8 text-white border-b border-[#1e3a5f]/50"> 
+            <Scissors className="w-10 h-10 text-[#4a9eff]"/> <h1 className="font-title text-3xl font-bold"> Cadastro de Barbearia</h1>
+            <p className="font-body text-slate-300"> Preencha os dados da sua barbearia para iniciar o cadastro. </p>
         </div>
-        <div className="p-8">
+        
+
+        {/*Form*/}
+        <div className="p-8 space-y-6">
             <Form />
         </div>
         </Card>

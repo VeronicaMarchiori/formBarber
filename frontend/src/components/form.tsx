@@ -1,8 +1,15 @@
-import {useState} from "react";
+import { useState } from "react";
 import Button from "../components/button";
 import Input from "./input";
 import Select from "../components/select";
-
+import { Store, 
+    User, 
+    Mail, 
+    Phone, 
+    MapPin, 
+    Map,
+    Armchair
+ } from "lucide-react";
 
 export default function Form() {
 
@@ -69,14 +76,21 @@ export default function Form() {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <Input name="name" label="Nome da Barbearia" placeholder="Ex: Barbearia do João" required onChange={handleChange} />
-            <Input name="owner" label="Nome do responsável" placeholder="Ex: João Silva" required onChange={handleChange} />
-            <Input name="email" label="E-mail" type="email" required placeholder="Ex: contato@barbearia.com" value={form.email} onChange={handleChange} />
-            <Input name="phone" label="Telefone/Whatsapp" placeholder="Ex: (49) 99999-9999" required value={form.phone} onChange={handleChange} />
-            <Input name="city" label="Cidade" placeholder="Cidade" required onChange={handleChange} />
-            <Select name="state" label="Estado" value={form.state} options={states} onChange={handleChange} />
-            <Input name="chairs" label="Número de Cadeiras" required type="number" min={1} step={1} value={form.chairs} onChange={handleChange} />
-            <Button type="submit"> Cadastrar </Button>
+            <label className="flex items-center gap-2"><Store size={16}/>Nome da Barbearia</label>
+            <Input name="name" placeholder="Ex: Barbearia do João" required onChange={handleChange} />
+            <label className="flex items-center gap-2"><User size={16}/>Nome do responsável</label>
+            <Input name="owner" placeholder="Ex: João Silva" required onChange={handleChange} />
+            <label className="flex items-center gap-2"><Mail size={16}/>E-mail</label>
+            <Input name="email" label="" type="email" required placeholder="Ex: contato@barbearia.com" value={form.email} onChange={handleChange} />
+            <label className="flex items-center gap-2"><Phone size={16}/>Telefone/Whatsapp</label>
+            <Input name="phone" placeholder="Ex: (49) 99999-9999" required value={form.phone} onChange={handleChange} />
+            <label className="flex items-center gap-2"><MapPin size={16}/>Cidade</label>
+            <Input name="city" placeholder="Ex: Chapecó" required onChange={handleChange} />
+            <label className="flex items-center gap-2"><Map size={16}/>Estado</label>
+            <Select name="state" value={form.state} options={states} onChange={handleChange} />
+            <label className="flex items-center gap-2"><Armchair size={16}/>Número de Cadeiras</label>
+            <Input name="chairs" placeholder="Ex: 2" required type="number" min={1} step={1} value={form.chairs} onChange={handleChange} />
+            <Button className="font-body font-semibold" type="submit"> Cadastrar </Button>
         </form>
     )
 }
