@@ -61,9 +61,6 @@ A conexão foi centralizada em um módulo específico para evitar repetição de
 Para este projeto optei por utilizar o Supabase como plataforma de hospedagem do banco de dados PostgreSQL.
 
 A escolha foi feita por oferecer uma configuração rápida, interface intuitiva para gerenciamento dos dados e integração simples com aplicações Node.js.
-
-Embora o projeto não utilize recursos mais avançados da plataforma, como autenticação ou armazenamento de arquivos, o Supabase foi responsável pela hospedagem do banco PostgreSQL, gerenciamento das tabelas da aplicação, persistência dos dados cadastrados e também disponibilização da connection string utilizada pela API.
-
 Dessa forma, toda a persistência dos dados da aplicação acontece em um ambiente remoto, permitindo que o sistema continue funcionando normalmente mesmo após o deploy do frontend e backend.
 
 A conexão com o Supabase é realizada através da variável de ambiente:
@@ -84,10 +81,10 @@ Quando ocorre uma tentativa de duplicação, o PostgreSQL retorna um erro espec�
 
 A API possui tratamento para diversas situações comuns:
 
-Falhas de conexão com banco de dados
-Tentativas de cadastro com e-mail já existente
-Registros inexistentes
-Erros internos do servidor
+* Falhas de conexão com banco de dados <br>
+* Tentativas de cadastro com e-mail já existente <br>
+* Registros inexistentes <br>
+* Erros internos do servidor <br>
 
 O objetivo foi evitar que erros técnicos fossem exibidos diretamente para o usuário final, e também por boas práticas.
 
