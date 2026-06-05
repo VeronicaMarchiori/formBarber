@@ -105,7 +105,7 @@ export async function updateBarbershop(req: Request, res: Response){
         console.error(error);
 
         return res.status(500).json({
-            messagee: "Erro ao atualizar barbearia",
+            message: "Erro ao atualizar barbearia",
         });
     }
 }

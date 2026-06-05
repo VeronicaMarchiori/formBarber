@@ -1,11 +1,12 @@
 
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom"; 
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { createBarbershop, updateBarbershop, type Barbershop } from "../services/barbershopService";
 import Button from "../components/button";
 import Input from "./input";
 import Select from "../components/select";
+import toast from "react-hot-toast";
 import { Store, 
     User, 
     Mail, 
@@ -18,7 +19,7 @@ import { Store,
 export default function Form() {
 
     const location = useLocation();
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
     const initialEditingBarbershop = location.state?.barbershop as Barbershop | undefined;
     const [editingBarbershop, setEditingBarbershop] = useState(initialEditingBarbershop);
 
@@ -112,10 +113,10 @@ export default function Form() {
         try {
             if (editingBarbershop?.id) {
                 await updateBarbershop(editingBarbershop.id, form);
-                alert("Barbearia atualizada com sucesso!!");
+                toast.success("Barbearia atualizada com sucesso!!");
             } else {
                 await createBarbershop(form);
-                alert("Barbearia cadastrada com sucesso!");
+                toast.success("Barbearia cadastrada com sucesso!");
             }
 
             setForm({
@@ -129,15 +130,15 @@ export default function Form() {
             });
 
             setEditingBarbershop(undefined);
-            Navigate("/", { replace: true, state: null});
+            navigate("/", { replace: true, state: null});
 
             } catch (error) {
                 console.error(error);
                 if(error instanceof Error){
-                    alert(error.message);
+                    toast.error(error.message);
                     return;
                 }
-                alert("Erro ao salvar barbearia!");
+                toast.error("Erro ao salvar barbearia!");
             }
         }
     

@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "../components/card";
 import BarberShopCard from "../components/barbershopcard";
+import toast from "react-hot-toast";
 import { List, Store, Search } from "lucide-react";
 import { getBarbershops, deleteBarbershop, type Barbershop, } from "../services/barbershopService";
 
@@ -24,10 +25,10 @@ export default function ListBarberShops() {
       current.filter((shop => shop.id !== id))
 
       );
-    alert ("Barbearia excluída com sucesso!!");
+    toast.success("Barbearia excluída com sucesso!!");
     } catch(error){
       console.error(error);
-      alert("Erro ao excluir barbearia");
+      toast.error("Erro ao excluir barbearia");
       }
     }
 
@@ -47,7 +48,7 @@ export default function ListBarberShops() {
         setBarbershops(data);
         } catch (error){
           console.error(error);
-          alert("Erro ao buscar barbearias");
+          toast.error("Erro ao buscar barbearias");
         } finally {
           setLoading(false);
         }

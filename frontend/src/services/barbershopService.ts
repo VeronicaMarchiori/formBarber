@@ -68,7 +68,7 @@ export async function updateBarbershop(id: number, data: Barbershop){
     });
 
     if (!response.ok) {
-        throw new Error("Erro ao atualizar barbearia!");
+        throw new Error(error.message || "Erro ao atualizar barbearia!");
     }
     return response.json();
 }
