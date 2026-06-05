@@ -1,5 +1,5 @@
 import './App.css'
-import Navbar from './components/Navbar'
+import Navbar from './components/navbar'
 import { Routes, Route} from 'react-router-dom'
 
 import ListBarbershops from './pages/ListBarbershops'

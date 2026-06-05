@@ -1,4 +1,4 @@
-import Form from "../components/Form";
+import Form from "../components/form";
 import Card from "../components/card";
 import { Scissors } from "lucide-react";
 
