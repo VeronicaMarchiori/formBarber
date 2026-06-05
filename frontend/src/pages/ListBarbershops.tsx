@@ -2,11 +2,30 @@ import {useEffect, useState} from "react";
 import Card from "../components/card";
 import BarberShopCard from "../components/barbershopcard";
 import { List, Store } from "lucide-react";
-import { getBarbershops } from "../services/barbershopService";
+import { getBarbershops, deleteBarbershop, type Barbershop, } from "../services/barbershopService";
 
 export default function ListBarberShops() {
-  const [barbershops, setBarbershops] = useState<barbershop[]>([]);
+  const [barbershops, setBarbershops] = useState<Barbershop[]>([]);
   const [loading, setLoading] = useState(true);
+
+  async function handleDelete(id:number){
+    const confirmDelete = confirm ("Tem certeza que deseja excluir esta barbearia?");
+
+    if(!confirmDelete) return;
+
+    try{
+      await deleteBarbershop(id);
+
+      setBarbershops((current) =>
+      current.filter((shop => shop.id !== id))
+
+      );
+    alert ("Barbearia excluída com sucesso!!");
+    } catch(error){
+      console.error(error);
+      alert("Erro ao excluir barbearia");
+      }
+    }
 
   useEffect(() => {
 
@@ -18,13 +37,13 @@ export default function ListBarberShops() {
           console.error(error);
           alert("Erro ao buscar barbearias");
         } finally {
-          seetLoading(false);
+          setLoading(false);
         }
     }
     loadBarbershops();
   }, []);
 
-  
+
   return (
     <div className="flex items-center justify-center p-4 min-h-[calc(100vh-4rem)]">
       <Card className="w-full max-w-2xl bg-gradient-to-b from-[#1a1d23] to-[#0f1419] rounded-2xl shadow-2xl overflow-hidden border border-[#1e3a5f]/30">
@@ -51,13 +70,15 @@ export default function ListBarberShops() {
               {barbershops.map((shop) => (
                 <BarberShopCard
                 key={shop.id}
+                id={shop.id!}
                 name={shop.name}
                 owner={shop.owner}
                 email={shop.email}
                 phone={shop.phone}
                 city={shop.city}
                 state={shop.state}
-                chairs={shop.chairs}
+                chairs={String(shop.chairs)}
+                onDelete={handleDelete}
                />
       ))}
     </div>

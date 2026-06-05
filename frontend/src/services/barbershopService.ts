@@ -41,3 +41,15 @@ export async function getBarbershops() {
 
     return response.json();
 }
+
+export async function deleteBarbershop(id:number){
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+    });
+
+    if (!response.ok) {
+        throw new Error("Erro ao excluir barbearia");
+    }
+
+    return response.json();
+}
