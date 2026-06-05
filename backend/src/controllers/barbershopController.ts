@@ -1,4 +1,4 @@
-import { Request, response } from "express";
+import { Request, Response } from "express";
 import { pool } from "../database/connection";
 
 export async function createBarbershop(req: Request, res: Response) {
@@ -36,6 +36,12 @@ export async function createBarbershop(req: Request, res: Response) {
         });
     } catch (error){
         console.error(error);
+
+        if ((error as any).code ==="23505") {
+            return res.status(400).json({
+                message: "E-mail já cadastrado",
+            });
+        }
 
         return res.status(500).json({
             message: "Erro ao cadstrar barbearia"

@@ -133,6 +133,10 @@ export default function Form() {
 
             } catch (error) {
                 console.error(error);
+                if(error instanceof Error){
+                    alert(error.message);
+                    return;
+                }
                 alert("Erro ao salvar barbearia!");
             }
         }

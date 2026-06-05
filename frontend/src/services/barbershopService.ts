@@ -26,7 +26,8 @@ export async function createBarbershop(data: Barbershop) {
     });
 
     if (!response.ok) {
-        throw new Error("Erro ao cadastrar barbearia");
+        const error = await response.json();
+        throw new Error(error.message || "Erro ao cadastrar barbearia");
     }
 
     return response.json();
