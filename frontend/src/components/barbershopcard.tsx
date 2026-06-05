@@ -20,7 +20,7 @@ type BarberShopCardProps ={
     chairs:string;
 
     onDelete?: (Id:number) => void;
-    onEdit?: (id:number) => void;
+    onEdit?: () => void;
 };
 
 export default function BarberShopCard({
@@ -44,7 +44,7 @@ export default function BarberShopCard({
             <Store size={20}/><h2 className="font-title font-semibold text-lg whitespace-nowrap overflow-hidden text-ellipsis">{name}</h2>
             </div>
             <div className="flex gap-2 shrink-0">
-                    <button type="button" onClick={() => onEdit?.(id)} className="flex h-6 w-6 items-center justify-center rounded-lg text-slate-400 hover:bg-[#4a9eff]/10 hover:text-[#4a9eff] transition" title="Editar">
+                    <button type="button" onClick={onEdit} className="flex h-6 w-6 items-center justify-center rounded-lg text-slate-400 hover:bg-[#4a9eff]/10 hover:text-[#4a9eff] transition" title="Editar">
                     <Pencil size={16}/>
                     </button>
                     <button type="button" onClick={() => onDelete?.(id)} className="flex h-6 w-6 items-center justify-center rounded-lg text-slate-400 hover:bg-red-500/10 hover:text-red-400 transition" title="Excluir">

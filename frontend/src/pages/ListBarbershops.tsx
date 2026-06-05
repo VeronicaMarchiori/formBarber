@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "../components/card";
 import BarberShopCard from "../components/barbershopcard";
 import { List, Store } from "lucide-react";
@@ -7,6 +8,8 @@ import { getBarbershops, deleteBarbershop, type Barbershop, } from "../services/
 export default function ListBarberShops() {
   const [barbershops, setBarbershops] = useState<Barbershop[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   async function handleDelete(id:number){
     const confirmDelete = confirm ("Tem certeza que deseja excluir esta barbearia?");
@@ -27,6 +30,14 @@ export default function ListBarberShops() {
       }
     }
 
+    function handleEdit(shop: Barbershop){
+      navigate("/", {
+        state: {
+          barbershop: shop,
+        },
+      });
+    }
+
   useEffect(() => {
 
     async function loadBarbershops() {
@@ -42,6 +53,7 @@ export default function ListBarberShops() {
     }
     loadBarbershops();
   }, []);
+
 
 
   return (
@@ -79,6 +91,7 @@ export default function ListBarberShops() {
                 state={shop.state}
                 chairs={String(shop.chairs)}
                 onDelete={handleDelete}
+                onEdit={() => handleEdit(shop)}
                />
       ))}
     </div>

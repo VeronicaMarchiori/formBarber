@@ -1,7 +1,8 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom"; 
 
-import { createBarbershop } from "../services/barbershopService";
+import { createBarbershop, updateBarbershop, type Barbershop } from "../services/barbershopService";
 import Button from "../components/button";
 import Input from "./input";
 import Select from "../components/select";
@@ -16,6 +17,11 @@ import { Store,
 
 export default function Form() {
 
+    const location = useLocation();
+    const Navigate = useNavigate();
+    const initialEditingBarbershop = location.state?.barbershop as Barbershop | undefined;
+    const [editingBarbershop, setEditingBarbershop] = useState(initialEditingBarbershop);
+
     const [form, setForm] = useState({
         name: "",
         owner: "",
@@ -26,6 +32,37 @@ export default function Form() {
         chairs:""
 
     });
+
+   useEffect(() => {
+        function handleBeforeUnload(event: BeforeUnloadEvent) {
+            if (editingBarbershop) {
+            event.preventDefault();
+            event.returnValue = "";
+            }
+        }
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+        }, [editingBarbershop]);
+
+
+    useEffect(() => {
+        if (editingBarbershop) {
+        setForm({
+        name: editingBarbershop.name,
+        owner: editingBarbershop.owner,
+        email: editingBarbershop.email,
+        phone: editingBarbershop.phone,
+        city: editingBarbershop.city,
+        state: editingBarbershop.state,
+        chairs: String(editingBarbershop.chairs),
+        });
+     window.history.replaceState({}, document.title, "/");
+    }
+    }, [editingBarbershop]);
     const states =[
         "AC", "AL", "AP", "AM", "BA",
         "CE", "DF", "ES", "GO", "MA",
@@ -73,24 +110,30 @@ export default function Form() {
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         try {
-            const result = await createBarbershop(form);
-
-            console.log(result);
-
-            alert("Barbearia cadastrada com sucesso");
+            if (editingBarbershop?.id) {
+                await updateBarbershop(editingBarbershop.id, form);
+                alert("Barbearia atualizada com sucesso!!");
+            } else {
+                await createBarbershop(form);
+                alert("Barbearia cadastrada com sucesso!");
+            }
 
             setForm({
-                name: "",
+                name:"",
                 owner:"",
                 email:"",
                 phone:"",
                 city:"",
                 state:"",
-                chairs:""
+                chairs:"",
             });
-        } catch (error) {
-            console.error(error);
-                alert("Erro ao cadastrar barbearia");
+
+            setEditingBarbershop(undefined);
+            Navigate("/", { replace: true, state: null});
+
+            } catch (error) {
+                console.error(error);
+                alert("Erro ao salvar barbearia!");
             }
         }
     
@@ -111,7 +154,7 @@ export default function Form() {
             <Select name="state" value={form.state} options={states} onChange={handleChange} />
             <label className="flex items-center gap-2"><Armchair size={16}/>Número de Cadeiras</label>
             <Input name="chairs" placeholder="Ex: 2" required type="number" min={1} step={1} value={form.chairs} onChange={handleChange} />
-            <Button className="font-body font-semibold" type="submit"> Cadastrar </Button>
+            <Button className="font-body font-semibold" type="submit"> {editingBarbershop ? "Salvar alterações" : "Cadastrar"} </Button>
         </form>
     )
 }

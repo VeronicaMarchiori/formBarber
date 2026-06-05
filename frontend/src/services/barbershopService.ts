@@ -53,3 +53,21 @@ export async function deleteBarbershop(id:number){
 
     return response.json();
 }
+
+export async function updateBarbershop(id: number, data: Barbershop){
+    const response = await fetch(`${API_URL}/${id}`,{
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            ...data,
+            chairs: Number(data.chairs),
+        }),
+    });
+
+    if (!response.ok) {
+        throw new Error("Erro ao atualizar barbearia!");
+    }
+    return response.json();
+}
