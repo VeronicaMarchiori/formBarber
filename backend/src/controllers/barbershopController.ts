@@ -9,3 +9,13 @@ export function createBarbershop(req: Request, res: Response) {
         barbershop:data,
     });
 }
+
+export function getBarbershops(req: Request, res: Response){
+    return res.status(200).json([
+        {
+            id:1,
+            name:"Barbearia teste"
+        }
+
+    ]);
+}
