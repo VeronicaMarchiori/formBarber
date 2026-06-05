@@ -1,16 +1,8 @@
 import { Router } from "express";
+import { createBarbershop } from "../controllers/barbershopController";
 
 const router = Router();
 
-router.post("/", (req,res) => {
-    const data = req.body;
-
-    console.log("Barbearia recebida:", data);
-
-    return res.status(201).json({
-        message:"Barbearia cadastrada com sucesso",
-        barbershop: data,
-    });
-});
+router.post("/", createBarbershop);
 
 export default router;
