@@ -10,7 +10,9 @@ export default function RegisterBarberShop() {
         {/* Header */}
 
         <div className="bg-gradient-to-r from-[#0f1419] via-[#1e3a5f] to-[#0a1628] p-8 text-white border-b border-[#1e3a5f]/50"> 
+            <div className="flex items-center gap-3">
             <Scissors className="w-10 h-10 text-[#4a9eff]"/> <h1 className="font-title text-3xl font-bold"> Cadastro de Barbearia</h1>
+            </div>
             <p className="font-body text-slate-300"> Preencha os dados da sua barbearia para iniciar o cadastro. </p>
         </div>
         
