@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import barbershopRoutes from "./routes/barbershopRoutes";
+import { pool } from "./database/connection";
 
 dotenv.config();
 
@@ -12,6 +13,10 @@ app.use(express.json());
 
 app.get("/", (req,res) => {
     res.send("API funcionando??");
+});
+app.get("/db-test", async(req,res) =>{
+    const result = await pool.query("SELECT NOW()");
+    res.json(result.rows[0]);
 });
 
 app.use("/barbershops", barbershopRoutes);
