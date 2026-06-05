@@ -69,7 +69,7 @@ export default function ListBarberShops() {
 
   return (
     <div className="flex justify-center items-start p-4 min-h-[calc(100vh-4rem)]">
-      <Card className="w-full max-w-2xl bg-gradient-to-b from-[#1a1d23] to-[#0f1419] rounded-2xl shadow-2xl overflow-hidden border border-[#1e3a5f]/30">
+      <Card className="w-full max-w-5xl bg-gradient-to-b from-[#1a1d23] to-[#0f1419] rounded-2xl shadow-2xl overflow-hidden border border-[#1e3a5f]/30">
 
         {/*Header*/}
         <div className="font-title bg-gradient-to-r from-[#0f1419] via-[#1e3a5f] to-[#0a1628] p-8 text-white border-b border-[#1e3a5f]/50">
