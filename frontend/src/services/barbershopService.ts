@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/barbershops";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export type Barbershop ={
     id?: number;
@@ -68,6 +68,7 @@ export async function updateBarbershop(id: number, data: Barbershop){
     });
 
     if (!response.ok) {
+        const error = await response.json();
         throw new Error(error.message || "Erro ao atualizar barbearia!");
     }
     return response.json();
