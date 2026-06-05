@@ -12,8 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req,res) => {
-    res.send("API funcionando??");
+    res.send("API funcionando");
 });
+
 app.get("/db-test", async(req,res) =>{
     const result = await pool.query("SELECT NOW()");
     res.json(result.rows[0]);
@@ -21,9 +22,9 @@ app.get("/db-test", async(req,res) =>{
 
 app.use("/barbershops", barbershopRoutes);
 
-//apenas pra eu conseguir testar se está funcionando
 const PORT = process.env.PORT || 3000;
-app.listen(3000, () => {
+
+app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 
 });
