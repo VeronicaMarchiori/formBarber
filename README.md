@@ -70,14 +70,14 @@ Rodar localmente deve ser tranquilo, porém no caso de quaisquer dúvidas sinta-
 ## Clonar o repositório
 
 ```git
--> gh repo clone VeronicaMarchiori/desafioStarApp <br>
+-> gh repo clone VeronicaMarchiori/desafioStarApp 
 -> cd desafioStarApp
 ```
 ## Back-end
 ```run
--> cd backend <br>
--> npm install <br>
--> npm run dev <br>
+-> cd backend 
+-> npm install 
+-> npm run dev 
 ```
 ### ** Não se esqueça de criar um arquivo .env:
 ```env
@@ -87,9 +87,9 @@ DATABASE_URL=sua_connection_string_do_supabase
 
 ## Front-end
 ```run
--> cd frontend <br>
--> npm install <br>
--> npm run dev <br>
+-> cd frontend 
+-> npm install 
+-> npm run dev 
 ```
 ### *** Crie um arquivo .env:
 
@@ -101,15 +101,15 @@ VITE_API_URL=http://localhost:3000/barbershops
 
 ## Backend
 ```run
--> cd backend <br>
--> npm run build <br>
--> npm start <br>
+-> cd backend 
+-> npm run build 
+-> npm start 
 ```
 ## Frontend
 
 ```run
--> cd frontend <br>
--> npm run build <br>
+-> cd frontend 
+-> npm run build 
 ```
 ## Autora
 
