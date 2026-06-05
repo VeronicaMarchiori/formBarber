@@ -1,10 +1,30 @@
+import {useEffect, useState} from "react";
 import Card from "../components/card";
 import BarberShopCard from "../components/barbershopcard";
 import { List, Store } from "lucide-react";
-
-const barbershops: any[] =[];
+import { getBarbershops } from "../services/barbershopService";
 
 export default function ListBarberShops() {
+  const [barbershops, setBarbershops] = useState<barbershop[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+
+    async function loadBarbershops() {
+      try {
+        const data = await getBarbershops();
+        setBarbershops(data);
+        } catch (error){
+          console.error(error);
+          alert("Erro ao buscar barbearias");
+        } finally {
+          seetLoading(false);
+        }
+    }
+    loadBarbershops();
+  }, []);
+
+  
   return (
     <div className="flex items-center justify-center p-4 min-h-[calc(100vh-4rem)]">
       <Card className="w-full max-w-2xl bg-gradient-to-b from-[#1a1d23] to-[#0f1419] rounded-2xl shadow-2xl overflow-hidden border border-[#1e3a5f]/30">
